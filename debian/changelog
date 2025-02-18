@@ -1,3 +1,12 @@
+librtfcomp (1.4-0+nmu1) stable; urgency=medium
+
+  * NMU: Non maintainer upload.
+  * Rebuild for Debian Bookworm
+  * Transition from Python 2 to 3 and Pyrex to Cython
+  * Rename package python3-rtfcomp to follow Debian Python naming conventions
+
+ -- Gustavo Perez Reyes <ghreyes71@gmail.com>  Fri, 31 Jan 2025 14:18:00 -0300
+
 librtfcomp (1.3-0ubuntu0~ppa1~xenial1) xenial; urgency=medium
 
   * xenial rebuild

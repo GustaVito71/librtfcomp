@@ -1,12 +1,10 @@
 Source: librtfcomp
 Section: libs
 Priority: optional
-Maintainer: Jonny Lamb <jonny@debian.org>
-Build-Depends: debhelper (>= 5), python-all-dev (>= 2.6.6-3), dh-python, python (>= 2.6.6-3), python-pyrex (>= 0.9.6)
-Standards-Version: 3.8.4
+Maintainer: Gustavo Reyes <ghreyes71@gmail.com>
+Build-Depends: debhelper-compat (= 12), python3-all-dev (>= 3.11), dh-python (>= 5.20), python3 (>= 3.11), cython3
+Standards-Version: 4.6.0
 Homepage: http://www.synce.org/
-Vcs-Git: git://git.jonnylamb.com/git/packaging/librtfcomp.git
-Vcs-Browser: http://git.jonnylamb.com/?p=packaging/librtfcomp.git;a=summary
 
 Package: librtfcomp-dev
 Section: libdevel
@@ -20,7 +18,7 @@ Description: Library to read compressed RTF files (development files)
 
 Package: librtfcomp-dbg
 Section: debug
-Priority: extra
+Priority: optional
 Architecture: any
 Depends: ${misc:Depends}, librtfcomp0 (= ${binary:Version})
 Description: Library to read compressed RTF files (debugging symbols)
@@ -38,11 +36,10 @@ Description: Library to read compressed RTF files
  .
  This package contains the shared object library files.
 
-Package: python-rtfcomp
+Package: python3-rtfcomp
 Section: python
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}
-Provides: ${python:Provides}
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python3:Depends}
 Description: Library to read compressed RTF files (Python bindings)
  Can decompress and recompress compressed RTF and convert from
  UTF8 to RTF for use in things like the AirSync protocols.

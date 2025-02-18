@@ -5,11 +5,11 @@ dnl
 dnl Shamelessly stolen from dbus' acinclude.m4 :)
 dnl
 AC_DEFUN([AM_CHECK_PYTHON_HEADERS],
-[AC_REQUIRE([AM_PATH_PYTHON])
+[AC_REQUIRE([AM_PATH_PYTHON_LOCAL])
 AC_MSG_CHECKING(for headers required to compile python extensions)
 dnl deduce PYTHON_INCLUDES
-py_prefix=`$PYTHON -c "import sys; print sys.prefix"`
-py_exec_prefix=`$PYTHON -c "import sys; print sys.exec_prefix"`
+py_prefix=`$PYTHON -c "import sys; print(sys.prefix)"`
+py_exec_prefix=`$PYTHON -c "import sys; print(sys.exec_prefix)"`
 PYTHON_INCLUDES="-I${py_prefix}/include/python${PYTHON_VERSION}"
 if test "$py_prefix" != "$py_exec_prefix"; then
   PYTHON_INCLUDES="$PYTHON_INCLUDES -I${py_exec_prefix}/include/python${PYTHON_VERSION}"
@@ -18,10 +18,10 @@ AC_SUBST(PYTHON_INCLUDES)
 dnl check if the headers exist:
 save_CPPFLAGS="$CPPFLAGS"
 CPPFLAGS="$CPPFLAGS $PYTHON_INCLUDES"
-AC_TRY_CPP([#include <Python.h>],dnl
-[AC_MSG_RESULT(found)
+AC_PREPROC_IFELSE([AC_LANG_SOURCE([[#include <Python.h>]])],dnl
+[AC_MSG_RESULT([found])
 $1],dnl
-[AC_MSG_RESULT(not found)
+[AC_MSG_RESULT([not found])
 $2])
 CPPFLAGS="$save_CPPFLAGS"
 ])

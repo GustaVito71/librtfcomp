@@ -1,6 +1,6 @@
 LIBS = -lc
 CFLAGS = @CFLAGS@ @VISIBILITY@
-INCLUDES = -I$(top_srcdir)/include
+AM_CPPFLAGS = -I$(top_srcdir)/include
 lib_LTLIBRARIES = librtfcomp.la
 librtfcomp_la_SOURCES = constants.c \
                         crc32.c \
