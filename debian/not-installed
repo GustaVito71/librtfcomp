@@ -1,0 +1,3 @@
+usr/lib/*/librtfcomp.la
+usr/lib/python3*/dist-packages/lib*.la
+usr/lib/python3*/dist-packages/lib*.a
