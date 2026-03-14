@@ -4,7 +4,7 @@ if HAVE_PYTHON
 INCLUDES = -I$(top_srcdir)/include
 CLEANFILES = pyrtfcomp.c
 
-rtfcompbindingsdir = $(pyexecdir)
+rtfcompbindingsdir = $(PYTHON_EXEC_PREFIX)/lib/python$(PYTHON_VERSION)/dist-packages
 rtfcompbindings_LTLIBRARIES = pyrtfcomp.la
 
 LDADD = ../src/librtfcomp.la
