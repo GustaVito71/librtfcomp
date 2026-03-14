@@ -1,0 +1,15 @@
+# Artefactos de debhelper
+debian/.debhelper/
+debian/*.debhelper.log
+debian/autoreconf.after
+debian/autoreconf.before
+debian/files
+debian/tmp/
+debian/*.substvars
+
+# macOS
+.DS_Store
+
+# Python
+*.pyc
+__pycache__/
