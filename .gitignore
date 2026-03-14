@@ -1,3 +1,6 @@
+# Quilt state
+.pc/
+
 # Artefactos de debhelper
 debian/.debhelper/
 debian/*.debhelper.log

@@ -20,9 +20,9 @@ cdef extern from "rtfcomp/rtfcomp.h":
 	char * LZRTFGetStringErrorCode(int ec) nogil
 
 cdef extern from "Python.h":
-	char *PyString_AsString(object string)
-	object PyString_FromStringAndSize(char *s, int len)
-	int PyString_AsStringAndSize(object obj, char **buffer, Py_ssize_t *length)
+	char *PyBytes_AsString(object string)
+	object PyBytes_FromStringAndSize(char *s, int len)
+	int PyBytes_AsStringAndSize(object obj, char **buffer, Py_ssize_t *length)
 
 cdef extern from "stdlib.h":
 	void free(void * ptr) nogil
@@ -36,7 +36,7 @@ class RTFException(Exception):
 		return str(self.errorcode)+": "+str(LZRTFGetStringErrorCode(self.errorcode))
 
 	def dump(self):
-		print "Failed to convert: %s" % self.strdesc
+		print("Failed to convert: %s" % self.strdesc)
 
 def RTFCompress(src):
 	cdef unsigned char * result
@@ -45,7 +45,7 @@ def RTFCompress(src):
 	cdef char * source_str
 	cdef Py_ssize_t source_len
 
-	PyString_AsStringAndSize(src, &source_str, &source_len)
+	PyBytes_AsStringAndSize(src, &source_str, &source_len)
 
 	with nogil:
 		rc=LZRTFCompress(&result,&reslen,<unsigned char *>source_str,source_len)
@@ -53,7 +53,7 @@ def RTFCompress(src):
 	if rc != 0:
 		raise RTFException(rc)
 
-	rstr = PyString_FromStringAndSize(<char *>result,reslen)
+	rstr = PyBytes_FromStringAndSize(<char *>result,reslen)
 	free(result)
 	return rstr
 
@@ -64,7 +64,7 @@ def RTFDecompress(src):
 	cdef char * source_str
 	cdef Py_ssize_t source_len
 
-	PyString_AsStringAndSize(src, &source_str, &source_len)
+	PyBytes_AsStringAndSize(src, &source_str, &source_len)
 
 	with nogil:
 		rc=LZRTFDecompress(&result,&reslen,<unsigned char *>source_str,source_len)
@@ -72,7 +72,7 @@ def RTFDecompress(src):
 	if rc != 0:
 		raise RTFException(rc)
 
-	rstr = PyString_FromStringAndSize(<char *>result, reslen)
+	rstr = PyBytes_FromStringAndSize(<char *>result, reslen)
 	free(result)
 	return rstr
 
@@ -87,7 +87,7 @@ def RTFConvertToUTF8(src, isCompressed):
 	opts.lenOpts = sizeof(RTFOPTS)
 	opts.isCompressed = isCompressed
 
-	PyString_AsStringAndSize(src, &source_str, &source_len)
+	PyBytes_AsStringAndSize(src, &source_str, &source_len)
 
 	with nogil:
 		rc=LZRTFConvertRTFToUTF8(&result, &reslen, <unsigned char *>source_str,source_len,&opts)
@@ -95,7 +95,7 @@ def RTFConvertToUTF8(src, isCompressed):
 	if rc != 0:
 		raise RTFException(rc)
 
-	rstr = PyString_FromStringAndSize(<char *>result, reslen)
+	rstr = PyBytes_FromStringAndSize(<char *>result, reslen)
 	free(result)
 	return rstr
 
@@ -112,8 +112,8 @@ def RTFConvertFromUTF8(src, header, isCompressed):
 	opts.lenOpts = sizeof(RTFOPTS)
 	opts.isCompressed = isCompressed
 
-	PyString_AsStringAndSize(src, &source_str, &source_len)
-	PyString_AsStringAndSize(src, &header_str, &header_len)
+	PyBytes_AsStringAndSize(src, &source_str, &source_len)
+	PyBytes_AsStringAndSize(src, &header_str, &header_len)
 
 	with nogil:
 		rc=LZRTFConvertUTF8ToRTF(&result, &reslen, <unsigned char *>source_str,source_len,<unsigned char *>header_str, header_len, &opts)
@@ -121,7 +121,7 @@ def RTFConvertFromUTF8(src, header, isCompressed):
 	if rc != 0:
 		raise RTFException(rc)
 
-	rstr = PyString_FromStringAndSize(<char *>result, reslen)
+	rstr = PyBytes_FromStringAndSize(<char *>result, reslen)
 	free(result)
 	return rstr
 
