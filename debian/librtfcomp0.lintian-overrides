@@ -1,0 +1,2 @@
+# First packaging of librtfcomp for Debian/Bookworm — no prior versions in archive
+librtfcomp0: distant-prerequisite-in-shlibs librtfcomp0 (>= 1.3-0~bookworm1) [shlibs]
