@@ -18,5 +18,5 @@ endif
 EXTRA_DIST = pyrtfcomp.pyx
 
 pyrtfcomp.c: $(srcdir)/pyrtfcomp.pyx
-	pyrexc $(srcdir)/pyrtfcomp.pyx -o ./pyrtfcomp.c
+	$(CYTHON) $(srcdir)/pyrtfcomp.pyx -o ./pyrtfcomp.c
 
